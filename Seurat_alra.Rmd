@@ -1,0 +1,31 @@
+---
+title: "ALRLA Imputation"
+output: html_notebook
+---
+
+```{r}
+library(Seurat)
+library(Matrix)
+library(anndata)
+```
+
+```{r}
+# n <- seurat object
+```
+
+```{r export UMI counts}
+write_h5ad(
+  AnnData(X = t(GetAssayData(n, slot="counts", assay="RNA")))
+  , 
+  "counts.h5ad")
+```
+
+```{r import imputed data}
+x <- read_h5ad("counts_imputed.h5ad")
+data.alra <- t(x[["X"]])
+rownames(x = data.alra) <- x[['var_names']]
+colnames(x = data.alra) <- colnames(n)
+assay.alra <- CreateAssayObject(data = data.alra)
+n[["alra"]] <- assay.alra
+DefaultAssay(n) <- "alra"
+```

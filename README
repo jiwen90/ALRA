@@ -1,0 +1,13 @@
+Python implementation of ALRA
+=============================
+
+Adaptively-thresholded Low Rank Approximation (ALRA)
+
+https://github.com/KlugerLab/ALRA
+
+Requirements:
+scipy
+anndata
+numpy
+pandas
+scikit-learn
